@@ -1,0 +1,42 @@
+{
+  "name": "insta-pilot",
+  "version": "1.0.0",
+  "description": "MCP server + skill que da a Claude control de tus cuentas de Instagram vía la API oficial: scraping/export, reels, comentarios, DMs, insights y bandeja unificada.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node bin/insta-pilot.js",
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "mcp",
+    "instagram",
+    "claude",
+    "claude-code",
+    "instagram-api",
+    "model-context-protocol"
+  ],
+  "author": "dfadify-web",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "zod": "^4.6.7"
+  },
+  "bin": {
+    "insta-pilot": "bin/insta-pilot.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfadify-web/insta-pilot.git"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ]
+}
