@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { load, save, norm, upsertAccount, isBlocked, blocklist, HOME } from '../src/config.js';
 import { request, refreshToken, client, BASE } from '../src/graph.js';
@@ -94,7 +94,9 @@ async function doctor() {
 function install() {
   const server = path.join(ROOT, 'bin', 'insta-pilot.js');
   try {
-    execFileSync('claude', ['mcp', 'add', '--scope', 'user', 'insta-pilot', '--', process.execPath, server], { stdio: 'inherit', shell: process.platform === 'win32' });
+    // claude is a .cmd shim on Windows, so it needs a shell: quote paths ourselves.
+    const q = (s) => `"${s}"`;
+    execSync(`claude mcp add --scope user insta-pilot -- ${q(process.execPath)} ${q(server)}`, { stdio: 'inherit' });
   } catch {
     print(`No se pudo ejecutar "claude mcp add". Añádelo a mano:\n  claude mcp add --scope user insta-pilot -- node "${server}"`);
   }
